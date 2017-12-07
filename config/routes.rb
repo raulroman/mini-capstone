@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  get '/product_url' => 'products#the_product'
+  get '/products' => 'products#index'
+
+  get '/products/:id' => 'products#show'
+
+  post '/products' => 'products#create'
+
+  patch 'products/:id' => 'products#update'
+
+  delete 'products/:id' => 'products#destroy'
 end

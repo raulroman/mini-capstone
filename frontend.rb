@@ -1,11 +1,66 @@
 require 'unirest'
 
-# Make a Ruby frontend script using the Unirest gem to display the results in the terminal instead of a web browser!
+base_url = "http://localhost:3000"
 
-response = Unirest.get("http://localhost:3000/product_url")
 
-#Show user that data
-product = response.body
+p "Check out my products"
+p "Choose a Product"
+p "[1] See all products"
+p "[2] sell one particular product"
+p "[3] Make a new Product"
+p "[4] Update a product"
+p "[5] Destroy a product"
+user_input = gets.chomp
+if user_input == '1'
+    #show all products
+  response = Unirest.get("#{base_url}/products")
+  p response.body
+elsif user_input == '2'
+    #get particular product
+    #get user input for the product id
+  p "Enter an id for a specific product"
+  product_id = gets.chomp
+  #make a unirest call to get back that item
+  response = Unirest.get("#{base_url}/products/#{product_id}")
+  p response.body
+elsif user_input == '3'
+  the_params = {}
+  p "Let's make a product!"
+  # Make a new product in the db
+  p "Tell me the product name?"
+  the_params['name'] = gets.chomp
+  p "Tell me the product price?"
+  the_params['price'] = gets.chomp
+  p "Tell me the product image"
+  the_params['image'] = gets.chomp
+  p "Tell me the product description"
+  the_params['description'] = gets.chomp
+  response = Unirest.post("#{base_url}/products?", parameters: the_params)
+  p response.body
+elsif user_input == '4'
+  the_params = {}
+  p "Which product would you like to update?"
+  the_id = gets.chomp
+  
+  # p "Let's update a product!"
+  # update a product in the db
+  p "Tell me the product name?"
+  the_params['name'] = gets.chomp
+  p "Tell me the product price?"
+  the_params['price'] = gets.chomp
+  p "Tell me the product image"
+  the_params['image'] = gets.chomp
+  p "Tell me the product description"
+  the_params['description'] = gets.chomp
+  
+  #Take that user input and update product
+  response = Unirest.patch("#{base_url}/products/#{the_id}}", parameters: the_params)
+  p response.body
+elsif user_input == '5'
+  p "Which product do you want to destroy?"
+  product_id = gets.chomp
+  response = Unirest.delete("#{base_url}/products/#{product_id}}")
+  render json: {message: "you destroyed a product"}
+  
+end
 
-p "This product name is #{product.first[1]}"
-# p product.first[1]
