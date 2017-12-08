@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
     #go to params hash and and get the id
     the_id = params['id']
     #grab a particular product from the db
-    product = Product.find_by(id: the_id)
+    product = Product.find_by(id: the_id) 
     #show a particular product
     render json:  product.as_json
     

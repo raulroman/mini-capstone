@@ -40,10 +40,11 @@ elsif user_input == '3'
 elsif user_input == '4'
   the_params = {}
   p "Which product would you like to update?"
-  the_id = gets.chomp
-  
-  # p "Let's update a product!"
-  # update a product in the db
+  product_id = gets.chomp
+  #make a unirest call to get back that item
+  response = Unirest.get("#{base_url}/products/#{product_id}")
+  p response.body
+  # update a product in the db 
   p "Tell me the product name?"
   the_params['name'] = gets.chomp
   p "Tell me the product price?"
@@ -54,7 +55,7 @@ elsif user_input == '4'
   the_params['description'] = gets.chomp
   
   #Take that user input and update product
-  response = Unirest.patch("#{base_url}/products/#{the_id}}", parameters: the_params)
+  response = Unirest.patch("#{base_url}/products/#{product_id}}", parameters: the_params)
   p response.body
 elsif user_input == '5'
   p "Which product do you want to destroy?"
