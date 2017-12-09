@@ -12,15 +12,15 @@ p "[4] Update a product"
 p "[5] Destroy a product"
 user_input = gets.chomp
 if user_input == '1'
-    #show all products
+  #show all products
   response = Unirest.get("#{base_url}/products")
   p response.body
 elsif user_input == '2'
-    #get particular product
-    #get user input for the product id
+  #get particular product
+  #get user input for the product id
   p "Enter an id for a specific product"
   product_id = gets.chomp
-  #make a unirest call to get back that item
+#make a unirest call to get back that item
   response = Unirest.get("#{base_url}/products/#{product_id}")
   p response.body
 elsif user_input == '3'
@@ -37,6 +37,7 @@ elsif user_input == '3'
   the_params['description'] = gets.chomp
   response = Unirest.post("#{base_url}/products?", parameters: the_params)
   p response.body
+
 elsif user_input == '4'
   the_params = {}
   p "Which product would you like to update?"
@@ -51,17 +52,20 @@ elsif user_input == '4'
   the_params['price'] = gets.chomp
   p "Tell me the product image"
   the_params['image'] = gets.chomp
-  p "Tell me the product description"
+  p "Tell me the product description"  
   the_params['description'] = gets.chomp
-  
+
   #Take that user input and update product
-  response = Unirest.patch("#{base_url}/products/#{product_id}}", parameters: the_params)
+  response = Unirest.patch("#{base_url}/products/#{product_id}", 
+    parameters: the_params)
+ 
   p response.body
+  
 elsif user_input == '5'
   p "Which product do you want to destroy?"
   product_id = gets.chomp
-  response = Unirest.delete("#{base_url}/products/#{product_id}}")
-  render json: {message: "you destroyed a product"}
-  
+  response = Unirest.delete("#{base_url}/products/#{product_id}")
 end
+
+
 

@@ -12,42 +12,42 @@ class ProductsController < ApplicationController
     #go to params hash and and get the id
     the_id = params['id']
     #grab a particular product from the db
-    product = Product.find_by(id: the_id) 
+    products = Product.find_by(id: the_id) 
     #show a particular product
-    render json:  product.as_json
+    render json:  products.as_json
     
   end
 
   def create
-    product = Product.new(
+    products = Product.new(
       name: params['name'],
       price: params['price'],
       image: params['image'],
       description: params['description']
       )
-    product.save
+    products.save
 
-    render json: product.as_json 
+    render json: products.as_json 
   end
 
   def update
     #grab a product from the database
     #actually update it
     the_id = params['id']
-    product = Product.find_by(id: the_id)
-    product.name = params['name']
-    product.price = params['price']
-    product.image = params['image']
-    product.description = params['description']
-    product.save 
-    render json: product.as_json
+    products = Product.find_by(id: the_id)
+    products.name = params['name']
+    products.price = params['price']
+    products.image = params['image']
+    products.description = params['description']
+    products.save 
+    render json: products.as_json
     
   end
   def destroy
     #find a particular product in db like update and show 
     the_id = params['id']
-    product = Product.find_by(id: the_id)
-    product.destroy
+    products = Product.find_by(id: the_id)
+    products.destroy
   end
 
 end
