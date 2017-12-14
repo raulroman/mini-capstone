@@ -1,7 +1,13 @@
 class Product < ApplicationRecord
 
-  # def as_json
-  #   {
+  validates :name, uniqueness: true 
+  validates :name, presence: true
+  validates :price, presence: true
+  validates :price, numericality: { greater_than: 0 }
+  validates :description, presence: true
+  validates :description, length: { minimum: 10 }
+
+  # def json  {
   #    name: name,
   #    price: price,
   #    image: image,
@@ -14,7 +20,7 @@ class Product < ApplicationRecord
   # end
 
   # def is_discounted?
-  #   price < 20
+  #   price.to_f < 20
 
   # end
   
@@ -27,6 +33,8 @@ class Product < ApplicationRecord
   #   price + tax
       
   # end
+
+
 
 end
 

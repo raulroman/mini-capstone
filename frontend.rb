@@ -1,4 +1,5 @@
 require 'unirest'
+require 'pp'
 
 base_url = "http://localhost:3000"
 
@@ -6,6 +7,7 @@ base_url = "http://localhost:3000"
 p "Check out my products"
 p "Choose a Product"
 p "[1] See all products"
+p "[1.1] Which product id would you like to see?"
 p "[2] sell one particular product"
 p "[3] Make a new Product"
 p "[4] Update a product"
@@ -15,6 +17,12 @@ if user_input == '1'
   #show all products
   response = Unirest.get("#{base_url}/products")
   p response.body
+elsif user_input == "1.1"
+  p "Enter a product id"
+  search_input = gets.chomp
+  response = Unirest.get("localhost:3000/products", parameters: {search_term: search_input })
+  product = response.body
+  pp product
 elsif user_input == '2'
   #get particular product
   #get user input for the product id
@@ -31,7 +39,7 @@ elsif user_input == '3'
   the_params['name'] = gets.chomp
   p "Tell me the product price?"
   the_params['price'] = gets.chomp
-  p "Tell me the product image"
+  p "Tell me the product image" 
   the_params['image'] = gets.chomp
   p "Tell me the product description"
   the_params['description'] = gets.chomp
@@ -47,13 +55,13 @@ elsif user_input == '4'
   p response.body
   # update a product in the db 
   p "Tell me the product name?"
-  the_params['name'] = gets.chomp
+  the_params[:name] = gets.chomp
   p "Tell me the product price?"
-  the_params['price'] = gets.chomp
+  the_params[:price] = gets.chomp
   p "Tell me the product image"
-  the_params['image'] = gets.chomp
+  the_params[:image] = gets.chomp
   p "Tell me the product description"  
-  the_params['description'] = gets.chomp
+  the_params[:description] = gets.chomp
 
   #Take that user input and update product
   response = Unirest.patch("#{base_url}/products/#{product_id}", 
