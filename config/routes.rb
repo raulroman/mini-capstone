@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'user_token' => 'user_token#create'
   get '/products/' => 'products#index'
   get '/products/:id' => 'products#show'
   post '/products/' => 'products#create'
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
 
   get '/suppliers/' => 'suppliers#index'
   post '/suppliers/' => 'suppliers#create'
+
+  post '/users/' => 'users#create'
 
 end
 

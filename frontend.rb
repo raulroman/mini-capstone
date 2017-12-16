@@ -1,8 +1,6 @@
 require 'unirest'
 require 'pp'
 
-base_url = "http://localhost:3000"
-
 
 p "Check out my products"
 p "Choose a Product"
@@ -15,7 +13,7 @@ p "[5] Destroy a product"
 user_input = gets.chomp
 if user_input == '1'
   #show all products
-  response = Unirest.get("#{base_url}/products")
+  response = Unirest.get("localhost:3000/products", parameters: {search_term: search})
   p response.body
 elsif user_input == "1.1"
   p "Enter a product id"
@@ -29,7 +27,7 @@ elsif user_input == '2'
   p "Enter an id for a specific product"
   product_id = gets.chomp
 #make a unirest call to get back that item
-  response = Unirest.get("#{base_url}/products/#{product_id}")
+  response = Unirest.get("localhost:3000/products/#{product_id}")
   p response.body
 elsif user_input == '3'
   the_params = {}
@@ -43,7 +41,7 @@ elsif user_input == '3'
   the_params['image'] = gets.chomp
   p "Tell me the product description"
   the_params['description'] = gets.chomp
-  response = Unirest.post("#{base_url}/products?", parameters: the_params)
+  response = Unirest.post("localhost:3000/products?", parameters: the_params)
   p response.body
 
 elsif user_input == '4'
@@ -51,7 +49,7 @@ elsif user_input == '4'
   p "Which product would you like to update?"
   product_id = gets.chomp
   #make a unirest call to get back that item
-  response = Unirest.get("#{base_url}/products/#{product_id}")
+  response = Unirest.get("localhost:3000/products/#{product_id}")
   p response.body
   # update a product in the db 
   p "Tell me the product name?"
@@ -64,7 +62,7 @@ elsif user_input == '4'
   the_params[:description] = gets.chomp
 
   #Take that user input and update product
-  response = Unirest.patch("#{base_url}/products/#{product_id}", 
+  response = Unirest.patch("localhost:3000/products/#{product_id}", 
     parameters: the_params)
  
   p response.body
@@ -72,7 +70,7 @@ elsif user_input == '4'
 elsif user_input == '5'
   p "Which product do you want to destroy?"
   product_id = gets.chomp
-  response = Unirest.delete("#{base_url}/products/#{product_id}")
+  response = Unirest.delete("localhost:3000/products/#{product_id}")
 end
 
 

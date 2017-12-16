@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   def index
     #get all products from my db
+    search = params[:search_term]
     products = Product.where("name LIKE ?", "%#{search}%").order(:id) 
     # show user all prodcuts
     render json: products.as_json
@@ -10,9 +11,8 @@ class ProductsController < ApplicationController
 
   def show
     #go to params hash and and get the id
-    the_id = params['id']
     #grab a particular product from the db
-    product = Product.find_by(id: the_id) 
+    product = Product.find_by(id: params[:id]) 
     #show a particular product
     render json:  product.as_json
     
@@ -20,10 +20,10 @@ class ProductsController < ApplicationController
 
   def create
     product = Product.new(
-      name: params['name'],
-      price: params['price'],
-      image: params['image'],
-      description: params['description']
+      name: params[:name],
+      price: params[:price],
+      image: params[:image],
+      description: params[:description]
       )
     if product.save 
       render json: product.as_json
@@ -34,9 +34,8 @@ class ProductsController < ApplicationController
 
   def update
     #grab a product from the database
-    #actually update it
-    the_id = params['id'] 
-    product = Product.find_by(id: the_id)
+    #actually update it 
+    product = Product.find_by(id: params[:id])
 
     if product.update(
     params[:name],
@@ -52,8 +51,7 @@ class ProductsController < ApplicationController
 
   def destroy
     #find a particular product in db like update and show 
-    the_id = params['id']
-    product = Product.find_by(id: the_id)
+    product = Product.find_by(id: params[:id])
     product.destroy
   end
 
