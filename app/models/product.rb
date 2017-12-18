@@ -15,23 +15,26 @@ class Product < ApplicationRecord
      image: image,
      description: description,
      is_discounted?: is_discounted?,
-     # tax: tax,
-     # total: total,
-     Supplier: supplier_id
+     tax: tax,
+     total: total,
+     Supplier: supplier_id,
+     updated_at: friendly_updated_at
      } 
+  end
+
+  def friendly_updated_at
+    updated_at.strftime("%A, %b %d")
   end
 
   def is_discounted?
     price.to_f < 20
-
   end
   
-  # def tax
-  #   price.to_f *= 0.09      
-  # end 
+  def tax
+    price.to_i * 0.09      
+  end 
 
-  # def total
-  #   price.to_f + tax
-      
-  # end
+  def total
+    price.to_i + tax
+  end
 end

@@ -10,6 +10,7 @@ p "[2] sell one particular product"
 p "[3] Make a new Product"
 p "[4] Update a product"
 p "[5] Destroy a product"
+p "[6] Signup"
 user_input = gets.chomp
 if user_input == '1'
   #show all products
@@ -68,9 +69,24 @@ elsif user_input == '4'
   p response.body
   
 elsif user_input == '5'
-  p "Which product do you want to destroy?"
+  p "Which product do you want to delete?"
   product_id = gets.chomp
   response = Unirest.delete("localhost:3000/products/#{product_id}")
+
+elsif user_input == '6'
+  the_params = {}
+  p "what is the username?"
+  the_params[:name] = gets.chomp
+  p "what is the email?"
+  the_params[:email] = gets.chomp
+  p "what is the password?"
+  the_params[:password] = gets.chomp
+  p "confirm the password"
+  the_params[:password_confirmation] = gets.chomp
+
+  response = Unirest.post("localhost:3000/users",
+    parameters: the_params)
+  pp response.body
 end
 
 

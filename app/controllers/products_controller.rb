@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   def index
     #get all products from my db
     search = params[:search_term]
-    products = Product.where("name LIKE ?", "%#{search}%").order(:id) 
+    products = Product.where("description LIKE ?", "%#{search}%").order(:id) 
     # show user all prodcuts
     render json: products.as_json
   end
