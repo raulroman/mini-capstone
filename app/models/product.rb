@@ -1,5 +1,9 @@
 class Product < ApplicationRecord
   belongs_to :supplier 
+  has_many :carted_products
+  has_many :orders, through: :carted_products
+
+
 
   validates :name, uniqueness: true 
   validates :name, presence: true
@@ -11,6 +15,7 @@ class Product < ApplicationRecord
   def as_json  
     {
      name: name,
+     id: id,
      price: price,
      image: image,
      description: description,

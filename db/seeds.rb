@@ -11,5 +11,5 @@
 #   {name: "Sony XBR Television", price: "2000", image: "blank", description: "4k widescreen Tv"}
 # ])
 
-Supplier.create!([{name:"Nike", email:"Support@nike.com", phone_number:"1800 Buy Nike"}])
-Supplier.create([{name:"Adidas", email:"Support@adidas.com", phone_number:"1800 3947399"}])
+# Supplier.create!([{name:"Nike", email:"Support@nike.com", phone_number:"1800 Buy Nike"}])
+# Supplier.create([{name:"Adidas", email:"Support@adidas.com", phone_number:"1800 3947399"}])

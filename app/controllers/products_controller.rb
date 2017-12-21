@@ -1,8 +1,12 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin, only: [:create, :update, :destroy]
+  
   def index
     #get all products from my db
-    search = params[:search_term]
-    products = Product.where("description LIKE ?", "%#{search}%").order(:id) 
+    # search = params[:search_term]
+    # products = Product.where("description LIKE ?", "%#{search}%").order(:id) 
+    category = Category.find_by(id: params[:category_id_input])
+
     # show user all prodcuts
     render json: products.as_json
   end
