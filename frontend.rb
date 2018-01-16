@@ -15,9 +15,10 @@ while true
   p "[6] Signup"
   p "[7] Log in"
   p "[8] Log out"
-  p "[9] Create an order"
+  # p "[9] Create an order"
   p 'Type "exit" to leave'
-  p "[10] Which product would you like to add"
+  p "[10] Which product would you like to add to cart"
+  p "[11] See all carted products"
   user_input = gets.chomp
   if user_input == '1'
     #show all products
@@ -127,7 +128,11 @@ while true
     the_params[:quantity] = gets.chomp
     response = Unirest.post("localhost:3000/carted_products", parameters: the_params)
     pp response.body
-
+  elsif user_input == '11'
+    # user_input = gets.chomp
+    response = Unirest.get("localhost:3000/carted_products")
+      
+    pp response.body
       
   end
 end

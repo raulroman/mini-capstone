@@ -13,3 +13,5 @@
 
 # Supplier.create!([{name:"Nike", email:"Support@nike.com", phone_number:"1800 Buy Nike"}])
 # Supplier.create([{name:"Adidas", email:"Support@adidas.com", phone_number:"1800 3947399"}])
+
+# CartedProduct.create!(status:"Carted")
