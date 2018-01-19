@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
-  belongs_to :supplier 
-  has_many :carted_products
-  has_many :orders, through: :carted_products
+  # belongs_to :supplier 
+  # has_many :carted_products
+  # has_many :orders, through: :carted_products
 
 
 
@@ -24,7 +24,7 @@ class Product < ApplicationRecord
      total: total,
      Supplier: supplier_id,
      updated_at: friendly_updated_at
-     } 
+    } 
   end
 
   def friendly_updated_at

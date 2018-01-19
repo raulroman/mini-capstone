@@ -44,10 +44,10 @@ class ProductsController < ApplicationController
     product = Product.find_by(id: params[:id])
 
     if product.update(
-    params[:name],
-    params[:price],
-    params[:image],
-    params[:description]
+      name: params[:name],
+      price: params[:price],
+      image: params[:image],
+      description: params[:description]
     )
       render json: product.as_json
     else 
